@@ -50,17 +50,26 @@ body {
    2. TOPBAR
    ============================================ */
 .topbar {
-  border-bottom: 1px solid var(--border-soft);
-  padding: 0.9rem 1.25rem;
-  background: transparent;
+  border-bottom: 1px solid #222;
+  padding: 0.7rem 1.25rem;
+  background: #000;
 }
 
 .topbar-brand {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.7rem;
   color: var(--text);
   text-decoration: none;
   font-weight: 700;
   font-size: 0.95rem;
   letter-spacing: 0.02em;
+}
+
+.raf-logo {
+  width: 38px;
+  height: 38px;
+  object-fit: contain;
 }
 
 .topbar-brand:hover {
