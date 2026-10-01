@@ -10,130 +10,150 @@
 }
 
 :root {
-  /* Colours */
-  --bg:          #0b0e13;
-  --bg-elev:     #141922;
-  --bg-elev-2:   #1c232e;
-  --border:      #263041;
-  --border-soft: #1a212c;
+  --bg:          #ffffff;
+  --bg-subtle:   #f4f6f8;
+  --border:      #d8dee5;
+  --border-soft: #e7ecf1;
 
-  --text:        #e8ecf2;
-  --text-muted:  #8a94a6;
-  --text-dim:    #5c6675;
+  --text:        #1b2733;
+  --text-muted:  #5b6b7c;
+  --text-dim:    #8a97a5;
 
-  --accent:      #4a9eff;   /* RAF-ish blue */
-  --accent-soft: #1e3a5f;
-  --danger:      #ff5c5c;
-  --success:     #3dd68c;
+  --accent:      #003a70;   /* RAF dark blue */
+  --accent-hover:#0a4d8c;
+  --accent-soft: #e6eef7;
 
-  /* Layout */
-  --radius:      12px;
-  --radius-sm:   8px;
-  --max-width:   960px;
+  --radius:      6px;
+  --max-width:   780px;
 
-  /* Type */
   --font: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
   --font-mono: "SF Mono", Consolas, "Liberation Mono", monospace;
-}
-
-html {
-  -webkit-text-size-adjust: 100%;
 }
 
 body {
   font-family: var(--font);
   background: var(--bg);
   color: var(--text);
-  line-height: 1.5;
-  min-height: 100vh;
+  line-height: 1.55;
   -webkit-font-smoothing: antialiased;
 }
 
 /* ============================================
-   2. LAYOUT
+   2. TOPBAR
    ============================================ */
-.container {
-  max-width: var(--max-width);
-  margin: 0 auto;
-  padding: 2rem 1.25rem 4rem;
+.topbar {
+  border-bottom: 1px solid var(--border-soft);
+  padding: 0.9rem 1.25rem;
+  background: var(--bg);
+}
+
+.topbar-brand {
+  color: var(--accent);
+  text-decoration: none;
+  font-weight: 700;
+  font-size: 0.95rem;
+  letter-spacing: 0.02em;
+}
+
+.topbar-brand:hover {
+  color: var(--accent-hover);
 }
 
 /* ============================================
-   3. HERO (menu header)
+   3. PAGE LAYOUT
    ============================================ */
-.hero {
-  text-align: center;
-  padding: 3rem 0 3.5rem;
+.page {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: 2.5rem 1.25rem 4rem;
 }
 
-.hero-eyebrow {
-  font-size: 0.75rem;
-  letter-spacing: 0.2em;
+.page-title {
+  font-size: 2rem;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  margin-bottom: 0.6rem;
+}
+
+.page-intro {
+  color: var(--text-muted);
+  font-size: 1rem;
+  max-width: 60ch;
+  margin-bottom: 2.5rem;
+}
+
+.section-heading {
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
   text-transform: uppercase;
-  color: var(--accent);
-  font-weight: 600;
+  color: var(--text-dim);
   margin-bottom: 0.75rem;
 }
 
-.hero-title {
-  font-size: clamp(2rem, 6vw, 3rem);
-  font-weight: 700;
-  letter-spacing: -0.02em;
-  margin-bottom: 0.5rem;
-}
-
-.hero-subtitle {
-  color: var(--text-muted);
-  font-size: 1rem;
-}
-
 /* ============================================
-   4. MENU GRID
+   4. TEST LIST (vertical rows)
    ============================================ */
-.menu-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
-  gap: 1rem;
+.test-list {
+  list-style: none;
+  border-top: 1px solid var(--border-soft);
 }
 
-.menu-card {
+.test-list li {
+  border-bottom: 1px solid var(--border-soft);
+}
+
+.test-row {
   display: flex;
-  flex-direction: column;
-  gap: 0.35rem;
-  padding: 1.25rem 1.35rem;
-  background: var(--bg-elev);
-  border: 1px solid var(--border-soft);
-  border-radius: var(--radius);
-  color: var(--text);
+  justify-content: space-between;
+  align-items: center;
+  gap: 1.5rem;
+  padding: 1.1rem 0.5rem;
   text-decoration: none;
-  transition: border-color 0.15s, background 0.15s, transform 0.1s;
+  color: var(--text);
+  transition: background 0.12s;
 }
 
-.menu-card:hover {
-  background: var(--bg-elev-2);
-  border-color: var(--border);
-  transform: translateY(-2px);
+.test-row:hover {
+  background: var(--accent-soft);
 }
 
-.menu-card-title {
-  font-size: 1.1rem;
+.test-row:hover .test-name {
+  color: var(--accent);
+}
+
+.test-name {
+  font-size: 1.05rem;
   font-weight: 600;
+  transition: color 0.12s;
 }
 
-.menu-card-meta {
+.test-detail {
   font-size: 0.85rem;
   color: var(--text-muted);
+  text-align: right;
   font-variant-numeric: tabular-nums;
+  flex-shrink: 0;
 }
 
 /* ============================================
-   5. QUIZ SHELL (for later)
+   5. FOOTER NOTE
+   ============================================ */
+.page-note {
+  margin-top: 2.5rem;
+  font-size: 0.82rem;
+  color: var(--text-dim);
+  max-width: 60ch;
+}
+
+/* ============================================
+   6. QUIZ SHELL (unchanged, for later)
    ============================================ */
 .quiz-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding-bottom: 1.25rem;
+  padding-bottom: 1rem;
   margin-bottom: 1.5rem;
   border-bottom: 1px solid var(--border-soft);
   gap: 1rem;
@@ -141,30 +161,30 @@ body {
 }
 
 .quiz-title {
-  font-size: 1.4rem;
-  font-weight: 600;
+  font-size: 1.3rem;
+  font-weight: 700;
 }
 
 .quiz-timer {
   font-family: var(--font-mono);
-  font-size: 1.3rem;
+  font-size: 1.15rem;
   font-weight: 600;
   color: var(--accent);
-  padding: 0.35rem 0.8rem;
-  background: var(--bg-elev);
+  padding: 0.3rem 0.7rem;
+  background: var(--bg-subtle);
   border: 1px solid var(--border-soft);
-  border-radius: var(--radius-sm);
+  border-radius: var(--radius);
   font-variant-numeric: tabular-nums;
 }
 
 .quiz-timer.is-low {
-  color: var(--danger);
-  border-color: var(--danger);
+  color: #c0392b;
+  border-color: #c0392b;
 }
 
 .quiz-progress {
   height: 4px;
-  background: var(--bg-elev);
+  background: var(--bg-subtle);
   border-radius: 2px;
   overflow: hidden;
   margin-bottom: 2rem;
@@ -177,18 +197,12 @@ body {
   transition: width 0.3s;
 }
 
-.quiz-body {
-  /* Question content renders here */
-}
-
 .back-link {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.4rem;
+  display: inline-block;
   color: var(--text-muted);
   text-decoration: none;
-  font-size: 0.9rem;
-  margin-bottom: 1.5rem;
+  font-size: 0.88rem;
+  margin-bottom: 1.25rem;
 }
 
 .back-link:hover {
@@ -196,13 +210,18 @@ body {
 }
 
 /* ============================================
-   6. FOOTER
+   7. MOBILE
    ============================================ */
-.site-footer {
-  margin-top: 4rem;
-  padding-top: 1.5rem;
-  border-top: 1px solid var(--border-soft);
-  text-align: center;
-  color: var(--text-dim);
-  font-size: 0.8rem;
+@media (max-width: 520px) {
+  .test-row {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.35rem;
+  }
+  .test-detail {
+    text-align: left;
+  }
+  .page-title {
+    font-size: 1.6rem;
+  }
 }
