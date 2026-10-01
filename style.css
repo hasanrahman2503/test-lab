@@ -10,18 +10,24 @@
 }
 
 :root {
-  --bg:          #ffffff;
-  --bg-subtle:   #f4f6f8;
-  --border:      #d8dee5;
-  --border-soft: #e7ecf1;
+  /* Gradient colors */
+  --grad-1: #0a1428;   /* deep navy (top right) */
+  --grad-2: #1a1a3a;   /* indigo transition */
+  --grad-3: #2d1535;   /* deep purple */
+  --grad-4: #3a0f22;   /* dark maroon (bottom left) */
 
-  --text:        #1b2733;
-  --text-muted:  #5b6b7c;
-  --text-dim:    #8a97a5;
+  /* UI colors */
+  --bg-subtle:   rgba(255, 255, 255, 0.06);
+  --border:      rgba(255, 255, 255, 0.15);
+  --border-soft: rgba(255, 255, 255, 0.08);
 
-  --accent:      #003a70;   /* RAF dark blue */
-  --accent-hover:#0a4d8c;
-  --accent-soft: #e6eef7;
+  --text:        #f0f4f8;
+  --text-muted:  #a0b0c0;
+  --text-dim:    #708090;
+
+  --accent:      #4a9eff;
+  --accent-hover:#7bb8ff;
+  --accent-soft: rgba(74, 158, 255, 0.15);
 
   --radius:      6px;
   --max-width:   780px;
@@ -32,7 +38,9 @@
 
 body {
   font-family: var(--font);
-  background: var(--bg);
+  background: linear-gradient(135deg, var(--grad-4), var(--grad-3), var(--grad-2), var(--grad-1));
+  background-attachment: fixed;
+  min-height: 100vh;
   color: var(--text);
   line-height: 1.55;
   -webkit-font-smoothing: antialiased;
@@ -44,11 +52,11 @@ body {
 .topbar {
   border-bottom: 1px solid var(--border-soft);
   padding: 0.9rem 1.25rem;
-  background: var(--bg);
+  background: transparent;
 }
 
 .topbar-brand {
-  color: var(--accent);
+  color: var(--text);
   text-decoration: none;
   font-weight: 700;
   font-size: 0.95rem;
@@ -56,7 +64,7 @@ body {
 }
 
 .topbar-brand:hover {
-  color: var(--accent-hover);
+  color: var(--accent);
 }
 
 /* ============================================
@@ -92,7 +100,7 @@ body {
 }
 
 /* ============================================
-   4. TEST LIST (vertical rows)
+   4. TEST LIST
    ============================================ */
 .test-list {
   list-style: none;
@@ -115,7 +123,7 @@ body {
 }
 
 .test-row:hover {
-  background: var(--accent-soft);
+  background: var(--bg-subtle);
 }
 
 .test-row:hover .test-name {
@@ -147,7 +155,7 @@ body {
 }
 
 /* ============================================
-   6. QUIZ SHELL (unchanged, for later)
+   6. QUIZ SHELL (for later)
    ============================================ */
 .quiz-header {
   display: flex;
@@ -178,8 +186,8 @@ body {
 }
 
 .quiz-timer.is-low {
-  color: #c0392b;
-  border-color: #c0392b;
+  color: #ff6b6b;
+  border-color: #ff6b6b;
 }
 
 .quiz-progress {
