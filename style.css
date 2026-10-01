@@ -1,42 +1,208 @@
-* {
+/* ============================================
+   1. RESET & TOKENS
+   ============================================ */
+*,
+*::before,
+*::after {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
 }
+
+:root {
+  /* Colours */
+  --bg:          #0b0e13;
+  --bg-elev:     #141922;
+  --bg-elev-2:   #1c232e;
+  --border:      #263041;
+  --border-soft: #1a212c;
+
+  --text:        #e8ecf2;
+  --text-muted:  #8a94a6;
+  --text-dim:    #5c6675;
+
+  --accent:      #4a9eff;   /* RAF-ish blue */
+  --accent-soft: #1e3a5f;
+  --danger:      #ff5c5c;
+  --success:     #3dd68c;
+
+  /* Layout */
+  --radius:      12px;
+  --radius-sm:   8px;
+  --max-width:   960px;
+
+  /* Type */
+  --font: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  --font-mono: "SF Mono", Consolas, "Liberation Mono", monospace;
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+}
+
 body {
-  font-family: system-ui, sans-serif;
+  font-family: var(--font);
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.5;
   min-height: 100vh;
-  display: grid;
-  place-items: center;
-  background: #0f1115;
-  color: #eaeaea;
+  -webkit-font-smoothing: antialiased;
 }
-.menu {
+
+/* ============================================
+   2. LAYOUT
+   ============================================ */
+.container {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: 2rem 1.25rem 4rem;
+}
+
+/* ============================================
+   3. HERO (menu header)
+   ============================================ */
+.hero {
   text-align: center;
-  padding: 2rem;
+  padding: 3rem 0 3.5rem;
 }
-.menu-title {
-  font-size: 2.5rem;
-  margin-bottom: 2rem;
+
+.hero-eyebrow {
+  font-size: 0.75rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--accent);
+  font-weight: 600;
+  margin-bottom: 0.75rem;
 }
-.menu-list {
+
+.hero-title {
+  font-size: clamp(2rem, 6vw, 3rem);
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  margin-bottom: 0.5rem;
+}
+
+.hero-subtitle {
+  color: var(--text-muted);
+  font-size: 1rem;
+}
+
+/* ============================================
+   4. MENU GRID
+   ============================================ */
+.menu-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 1rem;
+}
+
+.menu-card {
   display: flex;
   flex-direction: column;
-  gap: 1rem;
-  width: 260px;
-  margin: 0 auto;
-}
-.menu-item {
-  display: block;
-  padding: 0.9rem 1.2rem;
-  background: #1c1f26;
-  color: #eaeaea;
+  gap: 0.35rem;
+  padding: 1.25rem 1.35rem;
+  background: var(--bg-elev);
+  border: 1px solid var(--border-soft);
+  border-radius: var(--radius);
+  color: var(--text);
   text-decoration: none;
-  border-radius: 10px;
-  border: 1px solid #2a2f3a;
-  font-size: 1.05rem;
-  transition: background 0.15s;
+  transition: border-color 0.15s, background 0.15s, transform 0.1s;
 }
-.menu-item:hover {
-  background: #262b34;
+
+.menu-card:hover {
+  background: var(--bg-elev-2);
+  border-color: var(--border);
+  transform: translateY(-2px);
+}
+
+.menu-card-title {
+  font-size: 1.1rem;
+  font-weight: 600;
+}
+
+.menu-card-meta {
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  font-variant-numeric: tabular-nums;
+}
+
+/* ============================================
+   5. QUIZ SHELL (for later)
+   ============================================ */
+.quiz-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-bottom: 1.25rem;
+  margin-bottom: 1.5rem;
+  border-bottom: 1px solid var(--border-soft);
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.quiz-title {
+  font-size: 1.4rem;
+  font-weight: 600;
+}
+
+.quiz-timer {
+  font-family: var(--font-mono);
+  font-size: 1.3rem;
+  font-weight: 600;
+  color: var(--accent);
+  padding: 0.35rem 0.8rem;
+  background: var(--bg-elev);
+  border: 1px solid var(--border-soft);
+  border-radius: var(--radius-sm);
+  font-variant-numeric: tabular-nums;
+}
+
+.quiz-timer.is-low {
+  color: var(--danger);
+  border-color: var(--danger);
+}
+
+.quiz-progress {
+  height: 4px;
+  background: var(--bg-elev);
+  border-radius: 2px;
+  overflow: hidden;
+  margin-bottom: 2rem;
+}
+
+.quiz-progress-bar {
+  height: 100%;
+  background: var(--accent);
+  width: 0%;
+  transition: width 0.3s;
+}
+
+.quiz-body {
+  /* Question content renders here */
+}
+
+.back-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  color: var(--text-muted);
+  text-decoration: none;
+  font-size: 0.9rem;
+  margin-bottom: 1.5rem;
+}
+
+.back-link:hover {
+  color: var(--accent);
+}
+
+/* ============================================
+   6. FOOTER
+   ============================================ */
+.site-footer {
+  margin-top: 4rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid var(--border-soft);
+  text-align: center;
+  color: var(--text-dim);
+  font-size: 0.8rem;
 }
