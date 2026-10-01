@@ -3,7 +3,6 @@
   margin: 0;
   padding: 0;
 }
-
 body {
   font-family: system-ui, sans-serif;
   min-height: 100vh;
@@ -12,18 +11,14 @@ body {
   background: #0f1115;
   color: #eaeaea;
 }
-
 .menu {
   text-align: center;
   padding: 2rem;
 }
-
 .menu-title {
   font-size: 2.5rem;
   margin-bottom: 2rem;
-  letter-spacing: 0.02em;
 }
-
 .menu-list {
   display: flex;
   flex-direction: column;
@@ -31,7 +26,6 @@ body {
   width: 260px;
   margin: 0 auto;
 }
-
 .menu-item {
   display: block;
   padding: 0.9rem 1.2rem;
@@ -41,13 +35,8 @@ body {
   border-radius: 10px;
   border: 1px solid #2a2f3a;
   font-size: 1.05rem;
-  transition: background 0.15s, transform 0.1s;
+  transition: background 0.15s;
 }
-
 .menu-item:hover {
   background: #262b34;
-}
-
-.menu-item:active {
-  transform: scale(0.98);
 }
