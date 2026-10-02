@@ -44,17 +44,15 @@ body {
   font-weight: 700;
   font-size: 1rem;
 }
-
-.topbar-brand:hover {
-  color: #fff;
-}
-
 .raf-logo {
+  display: block;
   width: 40px;
   height: 40px;
   object-fit: contain;
 }
-
+.topbar-brand:hover {
+  color: #fff;
+}
 /* ============================================
    PAGE
    ============================================ */
