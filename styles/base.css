@@ -1,0 +1,9 @@
+body {
+  margin: 0;
+  font-family: var(--font);
+  background: #ffffff;
+  min-height: 100vh;
+  color: var(--text);
+  line-height: 1.55;
+  -webkit-font-smoothing: antialiased;
+}

@@ -1,0 +1,26 @@
+.topbar {
+  background: #000;
+  border-bottom: 4px solid var(--raf-blue);
+  padding: 0.75rem 1.5rem;
+}
+
+.topbar-brand {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.75rem;
+  color: #fff;
+  text-decoration: none;
+  font-weight: 700;
+  font-size: 1rem;
+}
+
+.raf-logo {
+  display: block;
+  width: 70px;
+  height: 70px;
+  object-fit: contain;
+}
+
+.topbar-brand:hover {
+  color: #fff;
+}

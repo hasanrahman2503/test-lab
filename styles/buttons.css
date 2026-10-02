@@ -1,0 +1,35 @@
+.test-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1.5rem;
+
+  padding: 1.1rem 1.25rem;
+
+  background: var(--raf-blue);
+  color: #fff;
+
+  text-decoration: none;
+  border: 1px solid var(--raf-blue);
+
+  transition:
+    background 0.15s ease,
+    border-color 0.15s ease;
+}
+
+.test-row:hover {
+  background: var(--raf-blue-dark);
+  border-color: var(--raf-blue-dark);
+}
+
+.test-name {
+  font-size: 1.05rem;
+  font-weight: 700;
+}
+
+.test-detail {
+  font-size: 0.85rem;
+  text-align: right;
+  color: #fff;
+  font-variant-numeric: tabular-nums;
+}

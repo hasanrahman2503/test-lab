@@ -1,0 +1,10 @@
+.page-note {
+  margin-top: 2rem;
+  padding: 1rem 1.25rem;
+
+  background: var(--raf-light-blue);
+  border-left: 4px solid var(--raf-blue);
+
+  font-size: 0.85rem;
+  color: var(--text-muted);
+}
