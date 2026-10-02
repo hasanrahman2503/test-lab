@@ -41,15 +41,19 @@
   list-style: none;
   background: var(--raf-light-blue);
   margin: 0;
-  padding: 1.5rem 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
 }
 
 .test-list li {
-  margin: 0 auto 0.75rem;
-  max-width: var(--max-width);
-  padding: 0 1.5rem;
+  margin: 0;
+  padding: 1.5rem 0;
+  display: flex;
+  justify-content: center;
+  border-bottom: 1px solid var(--raf-border);
 }
 
 .test-list li:last-child {
-  margin-bottom: 0;
+  border-bottom: none;
 }
