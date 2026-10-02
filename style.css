@@ -1,45 +1,24 @@
-/* ============================================
-   1. RESET & TOKENS
-   ============================================ */
-*,
-*::before,
-*::after {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
-}
-
 :root {
-  /* Gradient colors */
-  --grad-1: #0a1428;   /* deep navy (top right) */
-  --grad-2: #1a1a3a;   /* indigo transition */
-  --grad-3: #2d1535;   /* deep purple */
-  --grad-4: #3a0f22;   /* dark maroon (bottom left) */
+  --raf-blue: #005eb8;
+  --raf-blue-dark: #004b93;
+  --raf-light-blue: #e8f2f8;
+  --raf-border: #d4e2ea;
 
-  /* UI colors */
-  --bg-subtle:   rgba(255, 255, 255, 0.06);
-  --border:      rgba(255, 255, 255, 0.15);
-  --border-soft: rgba(255, 255, 255, 0.08);
+  --text: #222222;
+  --text-muted: #555555;
 
-  --text:        #f0f4f8;
-  --text-muted:  #a0b0c0;
-  --text-dim:    #708090;
+  --black: #000000;
 
-  --accent:      #4a9eff;
-  --accent-hover:#7bb8ff;
-  --accent-soft: rgba(74, 158, 255, 0.15);
+  --radius: 2px;
+  --max-width: 1000px;
 
-  --radius:      6px;
-  --max-width:   780px;
-
-  --font: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
-  --font-mono: "SF Mono", Consolas, "Liberation Mono", monospace;
+  --font: Arial, Helvetica, sans-serif;
+  --font-mono: "SF Mono", Consolas, monospace;
 }
 
 body {
   font-family: var(--font);
-  background: linear-gradient(135deg, var(--grad-4), var(--grad-3), var(--grad-2), var(--grad-1));
-  background-attachment: fixed;
+  background: #ffffff;
   min-height: 100vh;
   color: var(--text);
   line-height: 1.55;
@@ -47,198 +26,130 @@ body {
 }
 
 /* ============================================
-   2. TOPBAR
+   TOPBAR
    ============================================ */
+
 .topbar {
-  border-bottom: 1px solid #222;
-  padding: 0.7rem 1.25rem;
   background: #000;
+  border-bottom: 4px solid var(--raf-blue);
+  padding: 0.75rem 1.5rem;
 }
 
 .topbar-brand {
   display: inline-flex;
   align-items: center;
-  gap: 0.7rem;
-  color: var(--text);
+  gap: 0.75rem;
+  color: #fff;
   text-decoration: none;
   font-weight: 700;
-  font-size: 0.95rem;
-  letter-spacing: 0.02em;
-}
-
-.raf-logo {
-  width: 38px;
-  height: 38px;
-  object-fit: contain;
+  font-size: 1rem;
 }
 
 .topbar-brand:hover {
-  color: var(--accent);
+  color: #fff;
+}
+
+.raf-logo {
+  width: 40px;
+  height: 40px;
+  object-fit: contain;
 }
 
 /* ============================================
-   3. PAGE LAYOUT
+   PAGE
    ============================================ */
+
 .page {
   max-width: var(--max-width);
   margin: 0 auto;
-  padding: 2.5rem 1.25rem 4rem;
+  padding: 3rem 1.5rem 4rem;
 }
 
 .page-title {
-  font-size: 2rem;
+  color: var(--raf-blue);
+  font-size: 2.2rem;
   font-weight: 700;
-  letter-spacing: -0.01em;
-  margin-bottom: 0.6rem;
+  margin-bottom: 0.75rem;
 }
 
 .page-intro {
   color: var(--text-muted);
   font-size: 1rem;
-  max-width: 60ch;
+  max-width: 70ch;
   margin-bottom: 2.5rem;
 }
 
+/* ============================================
+   TEST SECTION
+   ============================================ */
+
 .section-heading {
-  font-size: 0.8rem;
+  color: var(--raf-blue);
+  font-size: 1.35rem;
   font-weight: 700;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-  color: var(--text-dim);
-  margin-bottom: 0.75rem;
+  margin-bottom: 1rem;
+}
+
+.test-list {
+  list-style: none;
+  display: grid;
+  gap: 0.75rem;
+  background: var(--raf-light-blue);
+  border: 1px solid var(--raf-border);
+  padding: 1rem;
 }
 
 /* ============================================
-   4. TEST LIST
+   TEST BUTTONS
    ============================================ */
-.test-list {
-  list-style: none;
-  border-top: 1px solid var(--border-soft);
-}
-
-.test-list li {
-  border-bottom: 1px solid var(--border-soft);
-}
 
 .test-row {
   display: flex;
   justify-content: space-between;
   align-items: center;
   gap: 1.5rem;
-  padding: 1.1rem 0.5rem;
+
+  padding: 1.1rem 1.25rem;
+
+  background: var(--raf-blue);
+  color: #fff;
+
   text-decoration: none;
-  color: var(--text);
-  transition: background 0.12s;
+  border: 1px solid var(--raf-blue);
+
+  transition:
+    background 0.15s ease,
+    border-color 0.15s ease;
 }
 
 .test-row:hover {
-  background: var(--bg-subtle);
-}
-
-.test-row:hover .test-name {
-  color: var(--accent);
+  background: var(--raf-blue-dark);
+  border-color: var(--raf-blue-dark);
 }
 
 .test-name {
   font-size: 1.05rem;
-  font-weight: 600;
-  transition: color 0.12s;
+  font-weight: 700;
 }
 
 .test-detail {
   font-size: 0.85rem;
-  color: var(--text-muted);
   text-align: right;
+  color: #fff;
   font-variant-numeric: tabular-nums;
-  flex-shrink: 0;
 }
 
 /* ============================================
-   5. FOOTER NOTE
+   NOTE
    ============================================ */
+
 .page-note {
-  margin-top: 2.5rem;
-  font-size: 0.82rem;
-  color: var(--text-dim);
-  max-width: 60ch;
-}
+  margin-top: 2rem;
+  padding: 1rem 1.25rem;
 
-/* ============================================
-   6. QUIZ SHELL (for later)
-   ============================================ */
-.quiz-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding-bottom: 1rem;
-  margin-bottom: 1.5rem;
-  border-bottom: 1px solid var(--border-soft);
-  gap: 1rem;
-  flex-wrap: wrap;
-}
+  background: var(--raf-light-blue);
+  border-left: 4px solid var(--raf-blue);
 
-.quiz-title {
-  font-size: 1.3rem;
-  font-weight: 700;
-}
-
-.quiz-timer {
-  font-family: var(--font-mono);
-  font-size: 1.15rem;
-  font-weight: 600;
-  color: var(--accent);
-  padding: 0.3rem 0.7rem;
-  background: var(--bg-subtle);
-  border: 1px solid var(--border-soft);
-  border-radius: var(--radius);
-  font-variant-numeric: tabular-nums;
-}
-
-.quiz-timer.is-low {
-  color: #ff6b6b;
-  border-color: #ff6b6b;
-}
-
-.quiz-progress {
-  height: 4px;
-  background: var(--bg-subtle);
-  border-radius: 2px;
-  overflow: hidden;
-  margin-bottom: 2rem;
-}
-
-.quiz-progress-bar {
-  height: 100%;
-  background: var(--accent);
-  width: 0%;
-  transition: width 0.3s;
-}
-
-.back-link {
-  display: inline-block;
+  font-size: 0.85rem;
   color: var(--text-muted);
-  text-decoration: none;
-  font-size: 0.88rem;
-  margin-bottom: 1.25rem;
-}
-
-.back-link:hover {
-  color: var(--accent);
-}
-
-/* ============================================
-   7. MOBILE
-   ============================================ */
-@media (max-width: 520px) {
-  .test-row {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 0.35rem;
-  }
-  .test-detail {
-    text-align: left;
-  }
-  .page-title {
-    font-size: 1.6rem;
-  }
 }
