@@ -12,8 +12,10 @@
   text-decoration: none;
   border: none;
   border-radius: 50px;
-  width: 90%;
+  width: 100%;
+  max-width: 600px;
   height: 80px;
+  box-sizing: border-box;
 
   transition:
     background 0.15s ease;
