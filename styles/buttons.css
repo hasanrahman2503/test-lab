@@ -6,7 +6,7 @@
 
   padding: 1.1rem 1.25rem;
 
-  background: #e74c7c;
+  background: #d94d7f;
   color: #fff;
 
   text-decoration: none;
@@ -18,7 +18,7 @@
 }
 
 .test-row:hover {
-  background: #d63a66;
+  background: #c43d6f;
 }
 
 .test-name {
