@@ -15,22 +15,73 @@
     <a class="close-button" href="../../" aria-label="Back to menu">×</a>
   </header>
 
-  <main class="quiz-screen">
-    <section class="quiz-panel">
-      <h1 class="quiz-title">WORK RATE TEST</h1>
+  <main class="work-rate-screen">
+    <div class="work-rate-ui">
+      <div class="work-rate-header">
+        <div class="timer-block">
+          <div class="timer-label">Time remaining for this section: <strong>00m 41s</strong></div>
+          <div class="progress-track" aria-label="Time remaining">
+            <span class="progress-fill"></span>
+          </div>
+        </div>
 
-      <div class="quiz-copy">
-        <p>This task tests how quickly and accurately you can compare work rates under time pressure.</p>
-
-        <p>You will be asked to solve practical questions using rates, output and efficiency information.</p>
-
-        <p>The familiarisation session gives examples of the type of data and calculations you may see in the full timed test.</p>
+        <div class="question-meta" aria-label="Question number">
+          <span class="question-word">Question</span>
+          <span class="question-number">1</span>
+          <span class="question-divider">/</span>
+          <span class="question-total">5</span>
+        </div>
       </div>
 
-      <div class="quiz-cta-row">
-        <a class="primary-button" href="../">Start Test</a>
+      <div class="work-rate-question">
+        <p class="prompt">Which could be the alternative code for</p>
+        <h2>Um Eek Ah?</h2>
       </div>
-    </section>
+
+      <div class="code-grid" aria-label="Code pattern grid">
+        <div class="code-cell code-letter"><span>Um</span></div>
+        <div class="code-cell code-letter"><span>Ta</span></div>
+        <div class="code-cell code-letter"><span>Eek</span></div>
+        <div class="code-cell code-letter"><span>Ah</span></div>
+
+        <div class="code-cell"><span>£7</span></div>
+        <div class="code-cell"><span>£9</span></div>
+        <div class="code-cell"><span>£4</span></div>
+        <div class="code-cell"><span>£3</span></div>
+
+        <div class="code-cell"><span class="mini-icon">🍓</span></div>
+        <div class="code-cell"><span class="mini-icon">🧁</span></div>
+        <div class="code-cell"><span class="mini-icon">🍕</span></div>
+        <div class="code-cell"><span class="mini-icon">🍏</span></div>
+      </div>
+
+      <div class="answer-strip" aria-label="Answer options">
+        <div class="answer-group">
+          <span class="answer-label">A</span>
+          <button class="answer-option" type="button"><span>£7</span><span class="mini-icon">🍓</span></button>
+        </div>
+        <div class="answer-group">
+          <span class="answer-label">B</span>
+          <button class="answer-option" type="button"><span>£4</span><span class="mini-icon">🍓</span></button>
+        </div>
+        <div class="answer-group">
+          <span class="answer-label">C</span>
+          <button class="answer-option" type="button"><span>£3</span><span class="mini-icon">🍕</span></button>
+        </div>
+        <div class="answer-group">
+          <span class="answer-label">D</span>
+          <button class="answer-option" type="button"><span>£7</span><span class="mini-icon">🍏</span></button>
+        </div>
+        <div class="answer-group">
+          <span class="answer-label">E</span>
+          <button class="answer-option" type="button"><span>£4</span><span class="mini-icon">🧁</span></button>
+        </div>
+      </div>
+
+      <div class="next-button-wrap">
+        <button class="primary-button" type="button">Next</button>
+      </div>
+    </div>
   </main>
 </body>
 </html>
