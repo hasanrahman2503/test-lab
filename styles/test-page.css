@@ -1,40 +1,147 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Mechanical Comprehension Test</title>
-  <link rel="stylesheet" href="../../style.css">
-</head>
-<body class="page-quiz">
-  <header class="quiz-topbar">
-    <div class="raf-brand" aria-label="Royal Air Force logo">
-      <span class="raf-mark" aria-hidden="true"></span>
-      <div class="raf-text">
-        <span>ROYAL</span>
-        <span>AIR FORCE</span>
-        <small>REGULAR &amp; RESERVE</small>
-      </div>
-    </div>
-    <a class="close-button" href="../../" aria-label="Back to menu">×</a>
-  </header>
+.page-quiz {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
 
-  <main class="quiz-screen">
-    <section class="quiz-panel">
-      <h1 class="quiz-title">MECHANICAL COMPREHENSION TEST</h1>
+.quiz-topbar {
+  background: #000;
+  padding: 0.75rem 1.5rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
 
-      <div class="quiz-copy">
-        <p>This test assesses your understanding of mechanical systems, movement, forces and simple machines.</p>
+.raf-brand {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  color: #fff;
+  font-size: 0.9rem;
+  font-weight: 700;
+  line-height: 1.1;
+  margin-left: 2rem;
+}
 
-        <p>You will be asked to reason about how mechanical components behave under different conditions and loads.</p>
+.raf-mark {
+  display: inline-block;
+  width: 90px;
+  height: 90px;
+  background: #fff;
+  border-radius: 50%;
+  flex-shrink: 0;
+  border: 3px solid #fff;
+  position: relative;
+}
 
-        <p>The familiarisation session provides examples of the kinds of questions and diagrams used in the real assessment.</p>
-      </div>
+.raf-mark::before {
+  content: '';
+  position: absolute;
+  inset: 8px;
+  border: 2px solid #000;
+  border-radius: 50%;
+}
 
-      <div class="quiz-cta-row">
-        <a class="primary-button" href="../">Start Test</a>
-      </div>
-    </section>
-  </main>
-</body>
-</html>
+.raf-text {
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+}
+
+.raf-text span {
+  display: block;
+  letter-spacing: 0.05em;
+}
+
+.raf-text small {
+  font-size: 0.65rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+}
+
+.close-button {
+  color: #fff;
+  text-decoration: none;
+  font-size: 2.5rem;
+  line-height: 1;
+  width: 60px;
+  height: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 2px solid #fff;
+  border-radius: 50%;
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+
+.close-button:hover {
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.quiz-screen {
+  flex: 1;
+  background: #e8f2f8;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 3rem 2rem;
+}
+
+.quiz-panel {
+  background: #fff;
+  padding: 4rem;
+  max-width: 800px;
+  width: 100%;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.quiz-title {
+  color: var(--raf-blue);
+  font-size: 2rem;
+  font-weight: 700;
+  text-align: center;
+  margin-bottom: 2rem;
+  letter-spacing: 0.05em;
+}
+
+.quiz-copy {
+  margin-bottom: 3rem;
+}
+
+.quiz-copy p {
+  color: var(--text);
+  font-size: 1.05rem;
+  line-height: 1.7;
+  margin-bottom: 1.5rem;
+}
+
+.quiz-copy p:last-child {
+  margin-bottom: 0;
+}
+
+.quiz-cta-row {
+  display: flex;
+  justify-content: center;
+}
+
+.primary-button {
+  background: #e63d63;
+  color: #fff;
+  padding: 1.5rem 3rem;
+  border-radius: 50px;
+  text-decoration: none;
+  font-size: 1.2rem;
+  font-weight: 700;
+  display: inline-block;
+  transition: background 0.2s ease;
+  border: none;
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+.primary-button:hover {
+  background: #d42d53;
+}
