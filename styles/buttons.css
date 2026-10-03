@@ -6,25 +6,25 @@
 
   padding: 1.1rem 1.25rem;
 
-  background: var(--raf-blue);
+  background: #e74c7c;
   color: #fff;
 
   text-decoration: none;
-  border: 1px solid transparent;
+  border: none;
+  border-radius: 50px;
 
   transition:
-    background 0.15s ease,
-    border-color 0.15s ease;
+    background 0.15s ease;
 }
 
 .test-row:hover {
-  background: var(--raf-blue-dark);
-  border-color: transparent;
+  background: #d63a66;
 }
 
 .test-name {
   font-size: 1.05rem;
   font-weight: 700;
+  font-family: var(--font);
 }
 
 .test-detail {
