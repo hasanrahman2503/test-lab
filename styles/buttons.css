@@ -12,8 +12,8 @@
   text-decoration: none;
   border: none;
   border-radius: 50px;
-  width: 100%;
-  max-width: 500px;
+  width: 90%;
+  height: 80px;
 
   transition:
     background 0.15s ease;
