@@ -38,6 +38,8 @@
   height: 48px;
   object-fit: contain;
   flex-shrink: 0;
+  position: relative;
+  left: 5px;
 }
 
 .topbar-brand:hover {
