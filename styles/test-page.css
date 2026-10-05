@@ -185,10 +185,11 @@
 }
 
 .answer-option.selected {
-  border: 3px solid var(--raf-blue);
-  background: #dcecff;
-  box-shadow: 0 0 0 2px rgba(17, 52, 92, 0.18);
-  transform: translateY(-1px);
+  background: #9fc5e8;
+  color: var(--raf-blue);
+  border-color: var(--raf-blue);
+  box-shadow: none;
+  transform: none;
 }
 
 .next-button-wrap {
