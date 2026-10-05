@@ -173,22 +173,10 @@ document.addEventListener("DOMContentLoaded", () => {
     const buttons = document.querySelectorAll(".answer-option");
 
     buttons.forEach(option => {
-      option.disabled = true;
       option.classList.remove("selected", "correct", "incorrect");
     });
 
     button.classList.add("selected");
-    button.classList.add(
-      button.dataset.correct === "true" ? "correct" : "incorrect"
-    );
-
-    const correctButton = [...buttons].find(
-      option => option.dataset.correct === "true"
-    );
-
-    if (correctButton && correctButton !== button) {
-      correctButton.classList.add("correct");
-    }
 
     $(".next-button-wrap .primary-button").disabled = false;
   }
