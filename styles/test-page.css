@@ -51,7 +51,8 @@
 
 .progress-fill {
   display: block;
-  width: 84%;
+  width: 100%;
+  transition: width 0.2s linear;
   height: 100%;
   background: var(--raf-blue);
   border-radius: 10px;
