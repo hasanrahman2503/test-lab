@@ -1,5 +1,5 @@
 document.addEventListener("DOMContentLoaded", () => {
-  const TOTAL_QUESTIONS = 5;
+  const TOTAL_QUESTIONS = 10;
   const TIME_LIMIT_SECONDS = 60;
 
   const WORDS = ["Um", "Ta", "Eek", "Ah", "Zo", "Ki", "Lu", "Fen"];
@@ -204,7 +204,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const next = event.target.closest(".next-button-wrap .primary-button");
 
     if (next && !next.disabled && state.timeRemaining > 0) {
-      state.question = state.question < TOTAL_QUESTIONS ? state.question + 1 : 1;
+      state.question += 1;
       renderQuestion();
     }
   });
