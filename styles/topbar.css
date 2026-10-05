@@ -49,8 +49,9 @@
 .close-button {
   width: 38px;
   height: 38px;
+  border: 2px solid #fff;
   border-radius: 50%;
-  background: #fff;
+  background: transparent;
   color: #fff;
   display: inline-flex;
   align-items: center;
@@ -64,5 +65,5 @@
 
 .close-button:hover {
   color: #fff;
-  background: #f2f2f2;
+  background: rgba(255, 255, 255, 0.08);
 }
