@@ -8,8 +8,8 @@
   const state = {
     question: 1,
     current: null,
-    startedAt: Date.now(),
     timerInterval: null,
+    deadline: 0,
     timeRemaining: TIME_LIMIT_SECONDS
   };
 
@@ -48,9 +48,6 @@
     return item.icon;
   }
 
-  // Every answer uses one item of each code type:
-  // letter + money + picture. This prevents answers such as
-  // "🍓 🍏 🍕" or "£4 £7 £2" from being obvious by type.
   function makeRepresentations(items) {
     const types = shuffle(["letter", "money", "picture"]);
     return items.map((item, index) => representation(item, types[index]));
@@ -58,32 +55,19 @@
 
   function makeQuestion() {
     const mapping = makeMapping();
-
-    // Pick three different columns for the original code.
     const selected = sample(mapping, 3);
     const question = selected.map(item => item.word).join(" ");
-
-    // The correct answer must use one alternative from each selected
-    // column, in exactly the same order.
     const correct = makeRepresentations(selected);
 
     const distractors = [];
-    const used = new Set([selected.map(item => mapping.indexOf(item)).join("|")]);
+    const originalKey = selected.map(item => mapping.indexOf(item)).join("|");
+    const used = new Set([originalKey]);
 
-    // Every answer must use three DIFFERENT columns. This prevents
-    // obviously wrong answers such as "£4 £4 A".
     while (distractors.length < 4) {
       const wrongColumns = sample(mapping, 3);
       const columnKey = wrongColumns.map(item => mapping.indexOf(item)).join("|");
 
-      // A wrong answer cannot use the exact same three columns in the
-      // exact same order as the original code.
-      if (columnKey === selected.map(item => mapping.indexOf(item)).join("|")) {
-        continue;
-      }
-
-      // Avoid repeating the same column sequence.
-      if (used.has(columnKey)) {
+      if (columnKey === originalKey || used.has(columnKey)) {
         continue;
       }
 
@@ -100,8 +84,8 @@
   }
 
   function updateTimer() {
-    const elapsedSeconds = Math.floor((Date.now() - state.startedAt) / 1000);
-    state.timeRemaining = Math.max(0, TIME_LIMIT_SECONDS - elapsedSeconds);
+    const millisecondsRemaining = Math.max(0, state.deadline - Date.now());
+    state.timeRemaining = Math.ceil(millisecondsRemaining / 1000);
 
     const minutes = Math.floor(state.timeRemaining / 60);
     const seconds = state.timeRemaining % 60;
@@ -113,21 +97,37 @@
 
     const progress = $(".progress-fill");
     if (progress) {
-      progress.style.width = `${(state.timeRemaining / TIME_LIMIT_SECONDS) * 100}%`;
+      progress.style.width = `${(millisecondsRemaining / (TIME_LIMIT_SECONDS * 1000)) * 100}%`;
     }
 
-    if (state.timeRemaining === 0 && state.timerInterval) {
-      clearInterval(state.timerInterval);
-      state.timerInterval = null;
+    if (millisecondsRemaining <= 0) {
+      state.timeRemaining = 0;
+
+      if (state.timerInterval) {
+        clearInterval(state.timerInterval);
+        state.timerInterval = null;
+      }
+
+      document.querySelectorAll(".answer-option").forEach(button => {
+        button.disabled = true;
+      });
+
+      const nextButton = $(".next-button-wrap .primary-button");
+      if (nextButton) {
+        nextButton.disabled = true;
+      }
     }
   }
 
   function startTimer() {
-    state.startedAt = Date.now();
-    state.timeRemaining = TIME_LIMIT_SECONDS;
-    updateTimer();
+    if (state.timerInterval) {
+      clearInterval(state.timerInterval);
+    }
 
-    if (state.timerInterval) clearInterval(state.timerInterval);
+    state.deadline = Date.now() + TIME_LIMIT_SECONDS * 1000;
+    state.timeRemaining = TIME_LIMIT_SECONDS;
+
+    updateTimer();
     state.timerInterval = setInterval(updateTimer, 100);
   }
 
@@ -157,14 +157,19 @@
         .map(item => `<span class="answer-item">${item}</span>`)
         .join("");
 
-      button.disabled = false;
+      button.disabled = state.timeRemaining === 0;
       button.classList.remove("selected", "correct", "incorrect");
     });
 
-    $(".next-button-wrap .primary-button").disabled = true;
+    const nextButton = $(".next-button-wrap .primary-button");
+    if (nextButton) {
+      nextButton.disabled = true;
+    }
   }
 
   function selectAnswer(button) {
+    if (state.timeRemaining === 0) return;
+
     const buttons = document.querySelectorAll(".answer-option");
 
     buttons.forEach(option => {
@@ -198,7 +203,7 @@
 
     const next = event.target.closest(".next-button-wrap .primary-button");
 
-    if (next && !next.disabled) {
+    if (next && !next.disabled && state.timeRemaining > 0) {
       state.question = state.question < TOTAL_QUESTIONS ? state.question + 1 : 1;
       renderQuestion();
     }
