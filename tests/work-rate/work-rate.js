@@ -121,9 +121,14 @@ document.addEventListener("DOMContentLoaded", () => {
         <p class="results-message">
           You scored ${state.score} out of ${TOTAL_QUESTIONS}.
         </p>
-        <a class="primary-button results-button" href="../../">Back to tests</a>
+        <div class="results-actions"><a class="primary-button results-button" href="../../">Back to tests</a><button class="results-try-again" type="button">Try again</button></div>
       </div>
     `;
+
+    const tryAgainButton = $(".results-try-again");
+    if (tryAgainButton) {
+      tryAgainButton.addEventListener("click", () => window.location.reload());
+    }
   }
 
   function startTimer() {
