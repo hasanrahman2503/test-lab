@@ -232,3 +232,61 @@
     grid-template-columns: 1fr;
   }
 }
+
+
+.work-rate-results {
+  width: min(700px, 100%);
+  margin: 5rem auto 0;
+  text-align: center;
+  color: var(--raf-blue);
+}
+
+.results-eyebrow {
+  margin: 0 0 0.5rem;
+  font-size: 1.1rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+.work-rate-results h1 {
+  margin: 0;
+  font-size: clamp(2.5rem, 5vw, 4.5rem);
+  line-height: 1.1;
+}
+
+.results-score {
+  display: flex;
+  align-items: baseline;
+  justify-content: center;
+  gap: 0.35rem;
+  margin: 2rem 0 1rem;
+}
+
+.results-score strong {
+  font-size: clamp(5rem, 12vw, 8rem);
+  line-height: 1;
+}
+
+.results-score span {
+  font-size: clamp(2rem, 4vw, 3rem);
+  font-weight: 700;
+}
+
+.results-message {
+  margin: 0 0 2rem;
+  font-size: 1.2rem;
+}
+
+.results-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 240px;
+  border-radius: 999px;
+  background: #e63d63;
+  color: #fff;
+  padding: 1.2rem 2.5rem;
+  font-size: 1.1rem;
+  text-decoration: none;
+}
