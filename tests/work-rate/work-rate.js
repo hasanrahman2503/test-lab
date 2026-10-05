@@ -10,7 +10,9 @@ document.addEventListener("DOMContentLoaded", () => {
     current: null,
     timerInterval: null,
     deadline: 0,
-    timeRemaining: TIME_LIMIT_SECONDS
+    timeRemaining: TIME_LIMIT_SECONDS,
+    score: 0,
+    finished: false
   };
 
   const $ = selector => document.querySelector(selector);
@@ -116,7 +118,37 @@ document.addEventListener("DOMContentLoaded", () => {
       if (nextButton) {
         nextButton.disabled = true;
       }
+
+      finishTest();
     }
+  }
+
+  function finishTest() {
+    if (state.finished) return;
+
+    state.finished = true;
+
+    if (state.timerInterval) {
+      clearInterval(state.timerInterval);
+      state.timerInterval = null;
+    }
+
+    const main = $(".work-rate-screen");
+
+    main.innerHTML = `
+      <div class="work-rate-results">
+        <p class="results-eyebrow">Test complete</p>
+        <h1>Your score</h1>
+        <div class="results-score">
+          <strong>${state.score}</strong>
+          <span>/ ${TOTAL_QUESTIONS}</span>
+        </div>
+        <p class="results-message">
+          You scored ${state.score} out of ${TOTAL_QUESTIONS}.
+        </p>
+        <a class="primary-button results-button" href="../../">Back to tests</a>
+      </div>
+    `;
   }
 
   function startTimer() {
@@ -191,7 +223,18 @@ document.addEventListener("DOMContentLoaded", () => {
 
     const next = event.target.closest(".next-button-wrap .primary-button");
 
-    if (next && !next.disabled && state.timeRemaining > 0) {
+    if (next && !next.disabled && state.timeRemaining > 0 && !state.finished) {
+      const selected = document.querySelector(".answer-option.selected");
+
+      if (selected && selected.dataset.correct === "true") {
+        state.score += 1;
+      }
+
+      if (state.question >= TOTAL_QUESTIONS) {
+        finishTest();
+        return;
+      }
+
       state.question += 1;
       renderQuestion();
     }
