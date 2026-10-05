@@ -1,6 +1,6 @@
 document.addEventListener("DOMContentLoaded", () => {
   const TOTAL_QUESTIONS = 10;
-  const TIME_LIMIT_SECONDS = 60;
+  const TIME_LIMIT_SECONDS = 240;
 
   const WORDS = ["Um", "Ta", "Eek", "Ah", "Zo", "Ki", "Lu", "Fen"];
   const ICONS = ["🍓", "🧁", "🍕", "🍏", "🍋", "🍉", "🍒", "🍪", "🥨", "🍇"];
