@@ -163,7 +163,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     const nextButton = $(".next-button-wrap .primary-button");
     if (nextButton) {
-      nextButton.disabled = true;
+      nextButton.disabled = state.timeRemaining === 0;
     }
   }
 
