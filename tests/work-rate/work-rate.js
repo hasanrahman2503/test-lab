@@ -1,5 +1,5 @@
 document.addEventListener("DOMContentLoaded", () => {
-  const TOTAL_QUESTIONS = 10;
+  const TOTAL_QUESTIONS = 20;
   const TIME_LIMIT_SECONDS = 240;
 
   const WORDS = ["Um", "Ta", "Eek", "Ah", "Zo", "Ki", "Lu", "Fen"];
