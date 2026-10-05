@@ -184,6 +184,13 @@
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
 }
 
+.answer-option.selected {
+  border: 3px solid var(--raf-blue);
+  background: #dcecff;
+  box-shadow: 0 0 0 2px rgba(17, 52, 92, 0.18);
+  transform: translateY(-1px);
+}
+
 .next-button-wrap {
   display: flex;
   justify-content: center;
