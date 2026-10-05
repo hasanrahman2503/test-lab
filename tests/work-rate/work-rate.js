@@ -38,8 +38,18 @@
     }));
   }
 
-  function representation(item) {
-    return Math.random() < 0.5 ? `£${item.value}` : item.icon;
+  function representation(item, type) {
+    if (type === "letter") return item.word;
+    if (type === "money") return `£${item.value}`;
+    return item.icon;
+  }
+
+  // Every answer uses one item of each code type:
+  // letter + money + picture. This prevents answers such as
+  // "🍓 🍏 🍕" or "£4 £7 £2" from being obvious by type.
+  function makeRepresentations(items) {
+    const types = shuffle(["letter", "money", "picture"]);
+    return items.map((item, index) => representation(item, types[index]));
   }
 
   function makeQuestion() {
@@ -51,7 +61,7 @@
 
     // The correct answer must use one alternative from each selected
     // column, in exactly the same order.
-    const correct = selected.map(representation);
+    const correct = makeRepresentations(selected);
 
     const distractors = [];
     const used = new Set([selected.map(item => mapping.indexOf(item)).join("|")]);
@@ -74,7 +84,7 @@
       }
 
       used.add(columnKey);
-      distractors.push(wrongColumns.map(representation));
+      distractors.push(makeRepresentations(wrongColumns));
     }
 
     const options = shuffle([
