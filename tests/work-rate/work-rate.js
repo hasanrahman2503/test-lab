@@ -13,10 +13,12 @@
 
   function shuffle(items) {
     const copy = [...items];
+
     for (let i = copy.length - 1; i > 0; i -= 1) {
       const j = Math.floor(Math.random() * (i + 1));
       [copy[i], copy[j]] = [copy[j], copy[i]];
     }
+
     return copy;
   }
 
@@ -42,35 +44,37 @@
 
   function makeQuestion() {
     const mapping = makeMapping();
+
+    // Pick three different columns for the original code.
     const selected = sample(mapping, 3);
     const question = selected.map(item => item.word).join(" ");
 
-    // Each answer contains exactly three representations:
-    // one representation for each of the three code words.
+    // The correct answer must use one alternative from each selected
+    // column, in exactly the same order.
     const correct = selected.map(representation);
 
     const distractors = [];
-    const used = new Set([correct.join("|")]);
+    const used = new Set([selected.map(item => mapping.indexOf(item)).join("|")]);
 
+    // Every answer must use three DIFFERENT columns. This prevents
+    // obviously wrong answers such as "£4 £4 A".
     while (distractors.length < 4) {
-      const wrong = selected.map((item, index) => {
-        const changeThis = Math.random() < 0.55 || index === Math.floor(Math.random() * 3);
+      const wrongColumns = sample(mapping, 3);
+      const columnKey = wrongColumns.map(item => mapping.indexOf(item)).join("|");
 
-        if (!changeThis) {
-          return representation(item);
-        }
-
-        const alternatives = mapping.filter(candidate => candidate.word !== item.word);
-        const replacement = alternatives[Math.floor(Math.random() * alternatives.length)];
-        return representation(replacement);
-      });
-
-      const key = wrong.join("|");
-
-      if (key !== correct.join("|") && !used.has(key)) {
-        used.add(key);
-        distractors.push(wrong);
+      // A wrong answer cannot use the exact same three columns in the
+      // exact same order as the original code.
+      if (columnKey === selected.map(item => mapping.indexOf(item)).join("|")) {
+        continue;
       }
+
+      // Avoid repeating the same column sequence.
+      if (used.has(columnKey)) {
+        continue;
+      }
+
+      used.add(columnKey);
+      distractors.push(wrongColumns.map(representation));
     }
 
     const options = shuffle([
