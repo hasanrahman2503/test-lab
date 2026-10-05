@@ -110,10 +110,6 @@ document.addEventListener("DOMContentLoaded", () => {
         state.timerInterval = null;
       }
 
-      document.querySelectorAll(".answer-option").forEach(button => {
-        button.disabled = true;
-      });
-
       const nextButton = $(".next-button-wrap .primary-button");
       if (nextButton) {
         nextButton.disabled = true;
