@@ -9,7 +9,7 @@
     current: null
   };
 
-  const $ = (selector) => document.querySelector(selector);
+  const $ = selector => document.querySelector(selector);
 
   function shuffle(items) {
     const copy = [...items];
@@ -36,57 +36,38 @@
     }));
   }
 
+  function representation(item) {
+    return Math.random() < 0.5 ? `£${item.value}` : item.icon;
+  }
+
   function makeQuestion() {
     const mapping = makeMapping();
     const selected = sample(mapping, 3);
-
-    // The question uses the three code words.
-    // The correct answer is their alternative representation:
-    // money becomes the matching icon, and icon becomes the matching money value.
     const question = selected.map(item => item.word).join(" ");
 
-    const correct = selected.map(item => ({
-      value: item.value,
-      icon: item.icon
-    }));
+    // Each answer contains exactly three representations:
+    // one representation for each of the three code words.
+    const correct = selected.map(representation);
 
     const distractors = [];
-    const used = new Set();
+    const used = new Set([correct.join("|")]);
 
     while (distractors.length < 4) {
-      const wrong = correct.map((item, index) => {
-        const shouldChange = index === Math.floor(Math.random() * 3) || Math.random() < 0.35;
-        if (!shouldChange) return { ...item };
+      const wrong = selected.map((item, index) => {
+        const changeThis = Math.random() < 0.55 || index === Math.floor(Math.random() * 3);
 
-        const alternatives = mapping.filter(candidate =>
-          candidate.value !== item.value &&
-          candidate.icon !== item.icon
-        );
+        if (!changeThis) {
+          return representation(item);
+        }
 
+        const alternatives = mapping.filter(candidate => candidate.word !== item.word);
         const replacement = alternatives[Math.floor(Math.random() * alternatives.length)];
-        return {
-          value: replacement.value,
-          icon: replacement.icon
-        };
+        return representation(replacement);
       });
 
-      // Guarantee at least one changed position.
-      if (wrong.every((item, index) =>
-        item.value === correct[index].value && item.icon === correct[index].icon
-      )) {
-        const index = Math.floor(Math.random() * 3);
-        const replacement = mapping.find(candidate =>
-          candidate.value !== correct[index].value &&
-          candidate.icon !== correct[index].icon
-        );
-        wrong[index] = {
-          value: replacement.value,
-          icon: replacement.icon
-        };
-      }
+      const key = wrong.join("|");
 
-      const key = wrong.map(item => `${item.value}|${item.icon}`).join(";");
-      if (!used.has(key)) {
+      if (key !== correct.join("|") && !used.has(key)) {
         used.add(key);
         distractors.push(wrong);
       }
@@ -108,6 +89,7 @@
     $(".work-rate-question h2").textContent = state.current.question;
 
     const cells = document.querySelectorAll(".code-cell");
+
     state.current.mapping.forEach((item, index) => {
       cells[index].querySelector("span").textContent = item.word;
       cells[index + 4].querySelector("span").textContent = `£${item.value}`;
@@ -115,13 +97,14 @@
     });
 
     const answerGroups = document.querySelectorAll(".answer-group");
+
     answerGroups.forEach((group, index) => {
       const option = state.current.options[index];
       const button = group.querySelector(".answer-option");
 
       button.dataset.correct = option.correct ? "true" : "false";
       button.innerHTML = option.items
-        .map(item => `<span>£${item.value}</span><span class="mini-icon">${item.icon}</span>`)
+        .map(item => `<span class="answer-item">${item}</span>`)
         .join("");
 
       button.disabled = false;
@@ -133,15 +116,21 @@
 
   function selectAnswer(button) {
     const buttons = document.querySelectorAll(".answer-option");
+
     buttons.forEach(option => {
       option.disabled = true;
       option.classList.remove("selected", "correct", "incorrect");
     });
 
     button.classList.add("selected");
-    button.classList.add(button.dataset.correct === "true" ? "correct" : "incorrect");
+    button.classList.add(
+      button.dataset.correct === "true" ? "correct" : "incorrect"
+    );
 
-    const correctButton = [...buttons].find(option => option.dataset.correct === "true");
+    const correctButton = [...buttons].find(
+      option => option.dataset.correct === "true"
+    );
+
     if (correctButton && correctButton !== button) {
       correctButton.classList.add("correct");
     }
@@ -149,22 +138,19 @@
     $(".next-button-wrap .primary-button").disabled = false;
   }
 
-  document.addEventListener("click", (event) => {
+  document.addEventListener("click", event => {
     const answer = event.target.closest(".answer-option");
+
     if (answer && !answer.disabled) {
       selectAnswer(answer);
       return;
     }
 
     const next = event.target.closest(".next-button-wrap .primary-button");
+
     if (next && !next.disabled) {
-      if (state.question < TOTAL_QUESTIONS) {
-        state.question += 1;
-        renderQuestion();
-      } else {
-        state.question = 1;
-        renderQuestion();
-      }
+      state.question = state.question < TOTAL_QUESTIONS ? state.question + 1 : 1;
+      renderQuestion();
     }
   });
 
