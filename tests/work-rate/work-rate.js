@@ -1,12 +1,16 @@
 (() => {
   const TOTAL_QUESTIONS = 5;
+  const TIME_LIMIT_SECONDS = 60;
 
   const WORDS = ["Um", "Ta", "Eek", "Ah", "Zo", "Ki", "Lu", "Fen"];
   const ICONS = ["🍓", "🧁", "🍕", "🍏", "🍋", "🍉", "🍒", "🍪", "🥨", "🍇"];
 
   const state = {
     question: 1,
-    current: null
+    current: null,
+    startedAt: Date.now(),
+    timerInterval: null,
+    timeRemaining: TIME_LIMIT_SECONDS
   };
 
   const $ = selector => document.querySelector(selector);
@@ -95,6 +99,38 @@
     return { mapping, selected, question, options };
   }
 
+  function updateTimer() {
+    const elapsedSeconds = Math.floor((Date.now() - state.startedAt) / 1000);
+    state.timeRemaining = Math.max(0, TIME_LIMIT_SECONDS - elapsedSeconds);
+
+    const minutes = Math.floor(state.timeRemaining / 60);
+    const seconds = state.timeRemaining % 60;
+    const timer = $("#work-rate-timer");
+
+    if (timer) {
+      timer.textContent = `${String(minutes).padStart(2, "0")}m ${String(seconds).padStart(2, "0")}s`;
+    }
+
+    const progress = $(".progress-fill");
+    if (progress) {
+      progress.style.width = `${(state.timeRemaining / TIME_LIMIT_SECONDS) * 100}%`;
+    }
+
+    if (state.timeRemaining === 0 && state.timerInterval) {
+      clearInterval(state.timerInterval);
+      state.timerInterval = null;
+    }
+  }
+
+  function startTimer() {
+    state.startedAt = Date.now();
+    state.timeRemaining = TIME_LIMIT_SECONDS;
+    updateTimer();
+
+    if (state.timerInterval) clearInterval(state.timerInterval);
+    state.timerInterval = setInterval(updateTimer, 100);
+  }
+
   function renderQuestion() {
     state.current = makeQuestion();
 
@@ -169,4 +205,5 @@
   });
 
   renderQuestion();
+  startTimer();
 })();
