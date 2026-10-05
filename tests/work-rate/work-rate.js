@@ -1,4 +1,4 @@
-(() => {
+document.addEventListener("DOMContentLoaded", () => {
   const TOTAL_QUESTIONS = 5;
   const TIME_LIMIT_SECONDS = 60;
 
@@ -211,4 +211,4 @@
 
   renderQuestion();
   startTimer();
-})();
+});
