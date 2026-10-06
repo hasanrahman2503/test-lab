@@ -16,6 +16,7 @@
   font-size: 0.95rem;
   line-height: 1.2;
   margin-left: 1.7rem;
+  transform: translateX(15px);
 }
 
 .topbar-with-close {
