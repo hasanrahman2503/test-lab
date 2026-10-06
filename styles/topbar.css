@@ -39,7 +39,7 @@
   object-fit: contain;
   flex-shrink: 0;
   position: relative;
-  left: 7px;
+  left: 9px;
 }
 
 .topbar-brand:hover {
