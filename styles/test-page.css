@@ -360,6 +360,11 @@
   justify-content: center;
 }
 
+.next-button-wrap:has(.back-button.hidden) {
+  position: relative;
+}
+
 .next-button-wrap:has(.back-button.hidden) .primary-button {
-  margin-inline: auto;
+  position: relative;
+  left: -120px;
 }
