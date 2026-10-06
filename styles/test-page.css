@@ -201,14 +201,22 @@
 
 .back-button,
 .work-rate-screen .primary-button {
+  box-sizing: border-box;
+  width: 240px;
   min-width: 240px;
-  border: none;
+  height: 56px;
+  min-height: 56px;
   border-radius: 999px;
-  background: #e63d63;
-  color: #fff;
-  padding: 1.2rem 2.5rem;
   font-size: 1.1rem;
   font-weight: 700;
+}
+
+.work-rate-screen .primary-button {
+  border: none;
+  background: #e63d63;
+  color: #fff;
+  padding: 0 2rem;
+  cursor: pointer;
 }
 
 .work-rate-screen .primary-button:hover {
@@ -216,17 +224,12 @@
 }
 
 .back-button {
-  min-width: 160px;
   border: 2px solid var(--raf-blue);
-  border-radius: 999px;
   background: #e8edf2;
   color: var(--raf-blue);
-  padding: 1.2rem 2rem;
-  font-size: 1.1rem;
-  font-weight: 700;
+  padding: 0 2rem;
   font-family: inherit;
   cursor: pointer;
-}
 
 .back-button:hover:not(:disabled) {
   background: #dce3ea;
