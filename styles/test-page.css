@@ -230,6 +230,7 @@
   padding: 0 2rem;
   font-family: inherit;
   cursor: pointer;
+}
 
 .back-button:hover:not(:disabled) {
   background: #dce3ea;
@@ -317,8 +318,9 @@
   align-items: center;
   justify-content: center;
   width: 240px;
-  height: 56px;
   min-width: 240px;
+  height: 56px;
+  min-height: 56px;
   box-sizing: border-box;
   border-radius: 999px;
   font-size: 1.1rem;
@@ -329,28 +331,23 @@
 
 .results-button {
   order: 1;
-  background: #e63d63;
-  color: #fff;
-  padding: 0 2.5rem;
-  text-decoration: none;
-}
-
-.results-actions {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 0.75rem;
-}
-
-.results-try-again {
   border: 2px solid var(--raf-blue);
   background: #e8edf2;
   color: var(--raf-blue);
-  padding: 0 2.5rem;
+  padding: 0 2rem;
+  text-decoration: none;
+}
+
+.results-try-again {
+  order: 2;
+  border: none;
+  background: #e63d63;
+  color: #fff;
+  padding: 0 2rem;
 }
 
 .results-try-again:hover {
-  background: #dce3ea;
+  background: #d42d53;
 }
 
 
