@@ -362,7 +362,3 @@
 .next-button-wrap:has(.back-button.hidden) {
   justify-content: center;
 }
-
-.next-button-wrap:has(.back-button.hidden) {
-  justify-content: center;
-}
