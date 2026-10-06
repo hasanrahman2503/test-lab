@@ -201,10 +201,14 @@
 .work-rate-screen .primary-button {
   min-width: 240px;
   border-radius: 999px;
-  background: #e63d63;
-  color: #fff;
+  background: transparent;
+  color: var(--raf-blue);
   padding: 1.2rem 2.5rem;
   font-size: 1.1rem;
+}
+
+.work-rate-screen .primary-button:hover {
+  background: rgba(17, 52, 92, 0.08);
 }
 
 @media (max-width: 860px) {
