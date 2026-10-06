@@ -352,7 +352,7 @@
 
 
 .back-button.hidden {
-  visibility: hidden;
+  display: none;
 }
 
 
@@ -361,10 +361,5 @@
 }
 
 .next-button-wrap:has(.back-button.hidden) {
-  position: relative;
-}
-
-.next-button-wrap:has(.back-button.hidden) .primary-button {
-  position: relative;
-  left: -120px;
+  justify-content: center;
 }
