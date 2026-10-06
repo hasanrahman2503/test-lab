@@ -177,7 +177,9 @@ document.addEventListener("DOMContentLoaded", () => {
 
     const backButton = $(".back-button");
     if (backButton) {
-      backButton.disabled = state.question === 1;
+      const isFirstQuestion = state.question === 1;
+      backButton.disabled = isFirstQuestion;
+      backButton.classList.toggle("hidden", isFirstQuestion);
     }
 
     const nextButton = $(".next-button-wrap .primary-button");
