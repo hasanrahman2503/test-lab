@@ -338,6 +338,10 @@
   text-decoration: none;
 }
 
+.results-button:hover {
+  background: #dce3ea;
+}
+
 .results-try-again {
   order: 2;
   border: none;
