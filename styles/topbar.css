@@ -83,6 +83,7 @@
   font-size: 0.9rem;
   font-weight: 700;
   white-space: nowrap;
+  transform: translateX(30px);
 }
 
 .about-button:hover {
