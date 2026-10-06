@@ -7,7 +7,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
   const state = {
     question: 1,
-    current: null,
+    questions: [],
+    answers: Array(TOTAL_QUESTIONS).fill(null),
     timerInterval: null,
     deadline: 0,
     timeRemaining: TIME_LIMIT_SECONDS,
@@ -65,11 +66,14 @@ document.addEventListener("DOMContentLoaded", () => {
       distractors.push(makeRepresentations(wrongColumns));
     }
 
-    const options = shuffle([
-      { items: correct, correct: true },
-      ...distractors.map(items => ({ items, correct: false }))
-    ]);
-    return { mapping, selected, question, options };
+    return {
+      mapping,
+      question,
+      options: shuffle([
+        { items: correct, correct: true },
+        ...distractors.map(items => ({ items, correct: false }))
+      ])
+    };
   }
 
   function updateTimer() {
@@ -94,8 +98,6 @@ document.addEventListener("DOMContentLoaded", () => {
         clearInterval(state.timerInterval);
         state.timerInterval = null;
       }
-      const nextButton = $(".next-button-wrap .primary-button");
-      if (nextButton) nextButton.disabled = true;
       finishTest();
     }
   }
@@ -108,6 +110,11 @@ document.addEventListener("DOMContentLoaded", () => {
       clearInterval(state.timerInterval);
       state.timerInterval = null;
     }
+
+    state.score = state.answers.reduce((total, answerIndex, questionIndex) => {
+      if (answerIndex === null) return total;
+      return total + (state.questions[questionIndex].options[answerIndex].correct ? 1 : 0);
+    }, 0);
 
     const main = $(".work-rate-screen");
     main.innerHTML = `
@@ -140,42 +147,60 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   function renderQuestion() {
-    state.current = makeQuestion();
+    const current = state.questions[state.question - 1];
 
     $(".question-number").textContent = state.question;
     $(".question-total").textContent = TOTAL_QUESTIONS;
-    $(".work-rate-question h2").textContent = state.current.question;
+    $(".work-rate-question h2").textContent = current.question;
 
     const cells = document.querySelectorAll(".code-cell");
-    state.current.mapping.forEach((item, index) => {
+    current.mapping.forEach((item, index) => {
       cells[index].querySelector("span").textContent = item.word;
       cells[index + 4].querySelector("span").textContent = `£${item.value}`;
       cells[index + 8].querySelector("span").textContent = item.icon;
     });
 
+    const savedAnswer = state.answers[state.question - 1];
     const answerGroups = document.querySelectorAll(".answer-group");
     answerGroups.forEach((group, index) => {
-      const option = state.current.options[index];
+      const option = current.options[index];
       const button = group.querySelector(".answer-option");
       button.dataset.correct = option.correct ? "true" : "false";
       button.innerHTML = option.items.map(item => `<span class="answer-item">${item}</span>`).join("");
       button.disabled = state.timeRemaining === 0;
       button.classList.remove("selected", "correct", "incorrect");
+
+      if (savedAnswer === index) {
+        button.classList.add("selected");
+      }
     });
+
+    const backButton = $(".back-button");
+    if (backButton) {
+      backButton.disabled = state.question === 1;
+    }
 
     const nextButton = $(".next-button-wrap .primary-button");
     if (nextButton) {
       nextButton.textContent = state.question === TOTAL_QUESTIONS ? "Finish" : "Next";
-      nextButton.disabled = state.timeRemaining === 0;
+      nextButton.disabled = state.timeRemaining === 0 || savedAnswer === null;
     }
   }
 
   function selectAnswer(button) {
     if (state.timeRemaining === 0) return;
+
     const buttons = document.querySelectorAll(".answer-option");
+    const selectedIndex = [...buttons].indexOf(button);
+    if (selectedIndex === -1) return;
+
+    state.answers[state.question - 1] = selectedIndex;
+
     buttons.forEach(option => option.classList.remove("selected", "correct", "incorrect"));
     button.classList.add("selected");
-    $(".next-button-wrap .primary-button").disabled = false;
+
+    const nextButton = $(".next-button-wrap .primary-button");
+    if (nextButton) nextButton.disabled = false;
   }
 
   document.addEventListener("click", event => {
@@ -185,14 +210,15 @@ document.addEventListener("DOMContentLoaded", () => {
       return;
     }
 
+    const back = event.target.closest(".back-button");
+    if (back && !back.disabled && state.timeRemaining > 0 && !state.finished) {
+      state.question -= 1;
+      renderQuestion();
+      return;
+    }
+
     const next = event.target.closest(".next-button-wrap .primary-button");
     if (next && !next.disabled && state.timeRemaining > 0 && !state.finished) {
-      const selected = document.querySelector(".answer-option.selected");
-
-      if (selected && selected.dataset.correct === "true") {
-        state.score += 1;
-      }
-
       if (state.question >= TOTAL_QUESTIONS) {
         finishTest();
         return;
@@ -203,6 +229,7 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   });
 
+  state.questions = Array.from({ length: TOTAL_QUESTIONS }, () => makeQuestion());
   renderQuestion();
   startTimer();
 });
