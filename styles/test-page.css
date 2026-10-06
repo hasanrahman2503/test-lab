@@ -354,3 +354,8 @@
 .back-button.hidden {
   visibility: hidden;
 }
+
+
+.next-button-wrap:has(.back-button.hidden) {
+  justify-content: center;
+}
