@@ -67,3 +67,56 @@
   color: #fff;
   background: rgba(255, 255, 255, 0.08);
 }
+
+.about-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 40px;
+  padding: 0 1rem;
+  border: 2px solid #fff;
+  border-radius: 999px;
+  background: transparent;
+  color: #fff;
+  text-decoration: none;
+  font-size: 0.9rem;
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+.about-button:hover {
+  background: rgba(255, 255, 255, 0.08);
+  color: #fff;
+}
+
+.topbar-with-close .about-button {
+  margin-left: auto;
+  margin-right: 0.75rem;
+}
+
+.about-page {
+  max-width: 800px;
+}
+
+.about-page p {
+  max-width: 760px;
+}
+
+.about-back-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 52px;
+  padding: 0 1.75rem;
+  margin-top: 1rem;
+  border-radius: 999px;
+  background: #e63d63;
+  color: #fff;
+  text-decoration: none;
+  font-weight: 700;
+}
+
+.about-back-button:hover {
+  background: #d42d53;
+  color: #fff;
+}
