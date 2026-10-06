@@ -349,3 +349,8 @@
 .results-try-again:hover {
   background: #dce3ea;
 }
+
+
+.back-button.hidden {
+  visibility: hidden;
+}
