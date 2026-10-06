@@ -73,20 +73,21 @@
   align-items: center;
   justify-content: center;
   min-height: 40px;
-  padding: 0 1rem;
-  border: 2px solid #fff;
-  border-radius: 999px;
+  padding: 0;
+  border: none;
+  border-radius: 0;
   background: transparent;
   color: #fff;
   text-decoration: none;
+  margin-right: 1rem;
   font-size: 0.9rem;
   font-weight: 700;
   white-space: nowrap;
 }
 
 .about-button:hover {
-  background: rgba(255, 255, 255, 0.08);
   color: #fff;
+  text-decoration: none;
 }
 
 .topbar-with-close .about-button {
