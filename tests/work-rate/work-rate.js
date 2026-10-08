@@ -102,15 +102,7 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   }
 
-  function finishTest() {
-    if (state.finished) return;
-    state.finished = true;
-
-    if (state.timerInterval) {
-      clearInterval(state.timerInterval);
-      state.timerInterval = null;
-    }
-
+  function renderResults() {
     state.score = state.answers.reduce((total, answerIndex, questionIndex) => {
       if (answerIndex === null) return total;
       return total + (state.questions[questionIndex].options[answerIndex].correct ? 1 : 0);
@@ -132,18 +124,24 @@ document.addEventListener("DOMContentLoaded", () => {
       </div>
     `;
 
-    const checkButton = $(".results-check");
-    if (checkButton) {
-      checkButton.addEventListener("click", () => {
-        state.reviewQuestion = 1;
-        renderReview();
-      });
+    $(".results-check")?.addEventListener("click", () => {
+      state.reviewQuestion = 1;
+      renderReview();
+    });
+
+    $(".results-try-again")?.addEventListener("click", () => window.location.reload());
+  }
+
+  function finishTest() {
+    if (state.finished) return;
+    state.finished = true;
+
+    if (state.timerInterval) {
+      clearInterval(state.timerInterval);
+      state.timerInterval = null;
     }
 
-    const tryAgainButton = $(".results-try-again");
-    if (tryAgainButton) {
-      tryAgainButton.addEventListener("click", () => window.location.reload());
-    }
+    renderResults();
   }
 
   function renderReview() {
@@ -203,7 +201,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     $(".review-next")?.addEventListener("click", () => {
       if (state.reviewQuestion === TOTAL_QUESTIONS) {
-        finishTest();
+        renderResults();
         return;
       }
       state.reviewQuestion += 1;
