@@ -139,7 +139,7 @@
 .topbar-with-close .about-button {
   position: static;
   margin: 0;
-  transform: none;
+  transform: translateX(15px);
 }
 
 .topbar-with-close .close-button {
