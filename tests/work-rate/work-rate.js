@@ -49,10 +49,13 @@ document.addEventListener("DOMContentLoaded", () => {
     return items.map((item, index) => representation(item, types[index]));
   }
 
-  function makeQuestion() {
+  function makeQuestion(questionNumber) {
     const mapping = makeMapping();
     const selected = sample(mapping, 3);
-    const question = selected.map(item => item.word).join(" ");
+    const useLetters = questionNumber % 2 === 1;
+    const question = selected
+      .map(item => useLetters ? item.word : `£${item.value}`)
+      .join(" ");
     const correct = makeRepresentations(selected);
     const distractors = [];
     const originalKey = selected.map(item => mapping.indexOf(item)).join("|");
@@ -302,7 +305,10 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   });
 
-  state.questions = Array.from({ length: TOTAL_QUESTIONS }, () => makeQuestion());
+  state.questions = Array.from(
+    { length: TOTAL_QUESTIONS },
+    (_, index) => makeQuestion(index + 1)
+  );
   renderQuestion();
   startTimer();
 });
