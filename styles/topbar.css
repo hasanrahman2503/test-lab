@@ -131,17 +131,19 @@
   color: #fff;
 }
 
-/* Keep the test-page info link in the same fixed position as the main-page link. */
+/* Keep the test-page toolbar aligned with the main page. */
 .topbar-with-close {
   position: relative;
 }
 
-
+.topbar-with-close .topbar-actions {
+  display: contents;
+}
 
 .topbar-with-close .about-button {
   position: static;
-  margin: 0;
-  transform: translateX(15px);
+  margin-right: 1rem;
+  transform: translateX(30px);
 }
 
 .topbar-with-close .close-button {
