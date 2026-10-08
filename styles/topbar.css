@@ -30,7 +30,7 @@
 
 .topbar-with-close .topbar-brand {
   margin-left: 1.7rem;
-  flex: 1;
+  flex: 0 0 auto;
 }
 
 .raf-logo {
@@ -130,11 +130,18 @@
 }
 
 .topbar-with-close .topbar-actions {
-  display: contents;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-left: 1rem;
 }
 
 .topbar-with-close .about-button {
-  position: absolute;
-  right: 6px;
+  position: static;
   margin: 0;
+  transform: none;
+}
+
+.topbar-with-close .close-button {
+  margin-left: auto;
 }
