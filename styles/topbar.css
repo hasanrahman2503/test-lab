@@ -16,7 +16,7 @@
   font-size: 0.95rem;
   line-height: 1.2;
   margin-left: 1.7rem;
-  transform: translateX(15px);
+  transform: none;
 }
 
 .topbar-with-close {
@@ -31,6 +31,13 @@
 .topbar-with-close .topbar-brand {
   margin-left: 1.7rem;
   flex: 0 0 auto;
+}
+
+.topbar-with-close .topbar-actions {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-left: 15px;
 }
 
 .raf-logo {
@@ -129,12 +136,7 @@
   position: relative;
 }
 
-.topbar-with-close .topbar-actions {
-  display: flex;
-  align-items: center;
-  gap: 0.75rem;
-  margin-left: 1rem;
-}
+
 
 .topbar-with-close .about-button {
   position: static;
