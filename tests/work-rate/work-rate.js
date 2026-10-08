@@ -128,14 +128,87 @@ document.addEventListener("DOMContentLoaded", () => {
         <p class="results-message">
           You scored ${state.score} out of ${TOTAL_QUESTIONS}.
         </p>
-        <div class="results-actions"><a class="primary-button results-button" href="../../">Back to tests</a><button class="results-try-again" type="button">Try again</button></div>
+        <div class="results-actions"><button class="primary-button results-check" type="button">Check answers</button><button class="results-try-again" type="button">Try again</button></div>
       </div>
     `;
+
+    const checkButton = $(".results-check");
+    if (checkButton) {
+      checkButton.addEventListener("click", () => {
+        state.reviewQuestion = 1;
+        renderReview();
+      });
+    }
 
     const tryAgainButton = $(".results-try-again");
     if (tryAgainButton) {
       tryAgainButton.addEventListener("click", () => window.location.reload());
     }
+  }
+
+  function renderReview() {
+    const current = state.questions[state.reviewQuestion - 1];
+    const selectedAnswer = state.answers[state.reviewQuestion - 1];
+    const correctAnswer = current.options.findIndex(option => option.correct);
+    const isCorrect = selectedAnswer !== null && current.options[selectedAnswer].correct;
+
+    const main = $(".work-rate-screen");
+    main.innerHTML = `
+      <div class="work-rate-review">
+        <div class="review-header">
+          <div>
+            <p class="results-eyebrow">Answer review</p>
+            <h1>Question ${state.reviewQuestion} <span>/ ${TOTAL_QUESTIONS}</span></h1>
+          </div>
+          <div class="review-result ${isCorrect ? "review-correct" : "review-incorrect"}">
+            ${isCorrect ? "Correct" : "Incorrect"}
+          </div>
+        </div>
+
+        <div class="review-question">
+          <p class="prompt">Which could be the alternative code for</p>
+          <h2>${current.question}</h2>
+        </div>
+
+        <div class="code-grid" aria-label="Code pattern grid">
+          ${current.mapping.map(item => `<div class="code-cell code-letter"><span>${item.word}</span></div>`).join("")}
+          ${current.mapping.map(item => `<div class="code-cell"><span>£${item.value}</span></div>`).join("")}
+          ${current.mapping.map(item => `<div class="code-cell"><span class="mini-icon">${item.icon}</span></div>`).join("")}
+        </div>
+
+        <div class="review-answer-list">
+          <div class="review-answer-row">
+            <span>Your answer</span>
+            <strong>${selectedAnswer === null ? "No answer" : current.options[selectedAnswer].items.join(" ")}</strong>
+          </div>
+          <div class="review-answer-row">
+            <span>Correct answer</span>
+            <strong>${current.options[correctAnswer].items.join(" ")}</strong>
+          </div>
+        </div>
+
+        <div class="review-navigation">
+          <button class="review-back" type="button" ${state.reviewQuestion === 1 ? "disabled" : ""}>Back</button>
+          <button class="review-next" type="button">${state.reviewQuestion === TOTAL_QUESTIONS ? "Back to score" : "Next"}</button>
+        </div>
+      </div>
+    `;
+
+    $(".review-back")?.addEventListener("click", () => {
+      if (state.reviewQuestion > 1) {
+        state.reviewQuestion -= 1;
+        renderReview();
+      }
+    });
+
+    $(".review-next")?.addEventListener("click", () => {
+      if (state.reviewQuestion === TOTAL_QUESTIONS) {
+        finishTest();
+        return;
+      }
+      state.reviewQuestion += 1;
+      renderReview();
+    });
   }
 
   function startTimer() {
