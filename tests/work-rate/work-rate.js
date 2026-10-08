@@ -44,8 +44,8 @@ document.addEventListener("DOMContentLoaded", () => {
     return item.icon;
   }
 
-  function makeRepresentations(items) {
-    const types = shuffle(["letter", "money", "picture"]);
+  function makeRepresentations(items, allowedTypes = ["letter", "money", "picture"]) {
+    const types = shuffle(allowedTypes).slice(0, items.length);
     return items.map((item, index) => representation(item, types[index]));
   }
 
@@ -56,7 +56,22 @@ document.addEventListener("DOMContentLoaded", () => {
     const question = selected
       .map(item => useLetters ? item.word : `£${item.value}`)
       .join(" ");
-    const correct = makeRepresentations(selected);
+
+    // If the question uses letters, answers can only use numbers/pictures.
+    // If the question uses numbers, answers can only use letters/pictures.
+    const answerTypes = useLetters
+      ? ["money", "picture"]
+      : ["letter", "picture"];
+
+    const makeAnswer = items => {
+      const types = Array.from(
+        { length: items.length },
+        (_, index) => answerTypes[index % answerTypes.length]
+      );
+      return items.map((item, index) => representation(item, types[index]));
+    };
+
+    const correct = makeAnswer(selected);
     const distractors = [];
     const originalKey = selected.map(item => mapping.indexOf(item)).join("|");
     const used = new Set([originalKey]);
@@ -66,7 +81,7 @@ document.addEventListener("DOMContentLoaded", () => {
       const columnKey = wrongColumns.map(item => mapping.indexOf(item)).join("|");
       if (columnKey === originalKey || used.has(columnKey)) continue;
       used.add(columnKey);
-      distractors.push(makeRepresentations(wrongColumns));
+      distractors.push(makeAnswer(wrongColumns));
     }
 
     return {
