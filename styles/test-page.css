@@ -541,3 +541,128 @@
     width: 100%;
   }
 }
+
+
+/* Work Rate pre-test instruction screen */
+.work-rate-ui[hidden],
+.work-rate-instructions[hidden] {
+  display: none !important;
+}
+
+.work-rate-instructions {
+  width: min(760px, 100%);
+  margin: 1rem auto 2rem;
+  color: var(--raf-blue);
+}
+
+.instructions-card {
+  padding: clamp(1.5rem, 4vw, 3rem);
+  background: #fff;
+  border: 1px solid #d3e0eb;
+  border-radius: 18px;
+  box-shadow: 0 12px 35px rgba(17, 52, 92, 0.08);
+}
+
+.instructions-eyebrow {
+  margin: 0 0 0.6rem;
+  color: #526f8b;
+  font-size: 0.85rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.instructions-card h1 {
+  margin: 0;
+  color: var(--raf-blue);
+  font-size: clamp(2rem, 5vw, 3.1rem);
+  line-height: 1.1;
+}
+
+.instructions-intro {
+  max-width: 55ch;
+  margin: 1rem 0 1.5rem;
+  color: #465c70;
+  font-size: 1.05rem;
+  line-height: 1.6;
+}
+
+.instructions-facts {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 0.75rem;
+  margin: 1.5rem 0 2rem;
+}
+
+.instruction-fact {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.35rem;
+  padding: 1rem 0.5rem;
+  background: #edf3f8;
+  border-radius: 10px;
+  text-align: center;
+}
+
+.instruction-fact-value {
+  font-size: clamp(1.5rem, 4vw, 2rem);
+  font-weight: 800;
+  line-height: 1.1;
+}
+
+.instruction-fact-label {
+  color: #526f8b;
+  font-size: 0.82rem;
+  font-weight: 600;
+}
+
+.instructions-card h2 {
+  margin: 0 0 0.75rem;
+  font-size: 1.2rem;
+}
+
+.instructions-list {
+  display: grid;
+  gap: 0.7rem;
+  margin: 0;
+  padding-left: 1.35rem;
+  color: #344d63;
+  line-height: 1.55;
+}
+
+.instructions-list li {
+  padding-left: 0.2rem;
+}
+
+.work-rate-screen .start-test-button {
+  display: block;
+  width: min(100%, 320px);
+  min-width: 0;
+  margin: 2rem auto 0;
+}
+
+.instructions-note {
+  margin: 0.85rem 0 0;
+  color: #62778a;
+  font-size: 0.9rem;
+  text-align: center;
+}
+
+@media (max-width: 520px) {
+  .work-rate-instructions {
+    margin-top: 0;
+  }
+
+  .instructions-facts {
+    gap: 0.45rem;
+  }
+
+  .instruction-fact {
+    padding: 0.85rem 0.25rem;
+  }
+
+  .instruction-fact-label {
+    font-size: 0.75rem;
+  }
+}
