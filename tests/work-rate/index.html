@@ -19,7 +19,41 @@
   </header>
 
   <main class="work-rate-screen">
-    <div class="work-rate-ui">
+    <section class="work-rate-instructions" aria-labelledby="instructions-title">
+      <div class="instructions-card">
+        <p class="instructions-eyebrow">RAF DAA Practice</p>
+        <h1 id="instructions-title">Work Rate Test</h1>
+        <p class="instructions-intro">Read the code carefully and work as quickly and accurately as you can.</p>
+
+        <div class="instructions-facts" aria-label="Test details">
+          <div class="instruction-fact">
+            <span class="instruction-fact-value">04:00</span>
+            <span class="instruction-fact-label">Time limit</span>
+          </div>
+          <div class="instruction-fact">
+            <span class="instruction-fact-value">20</span>
+            <span class="instruction-fact-label">Questions</span>
+          </div>
+          <div class="instruction-fact">
+            <span class="instruction-fact-value">5</span>
+            <span class="instruction-fact-label">Options per question</span>
+          </div>
+        </div>
+
+        <h2>Instructions</h2>
+        <ul class="instructions-list">
+          <li>Use the code grid to match each word, number and picture.</li>
+          <li>Choose the alternative code that represents the same items using a different type of symbol.</li>
+          <li>Select one answer, then press <strong>Next</strong>. You can go back to earlier questions.</li>
+          <li>The timer starts when you press <strong>Start test</strong> and the test ends when time runs out.</li>
+        </ul>
+
+        <button class="primary-button start-test-button" type="button">Start test</button>
+        <p class="instructions-note">Try to answer every question before the time runs out.</p>
+      </div>
+    </section>
+
+    <div class="work-rate-ui" hidden>
       <div class="work-rate-header">
         <div class="timer-block">
           <div class="timer-label">Time remaining for this section: <strong id="work-rate-timer">04m 00s</strong></div>
