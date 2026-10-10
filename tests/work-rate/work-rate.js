@@ -324,6 +324,16 @@ document.addEventListener("DOMContentLoaded", () => {
     { length: TOTAL_QUESTIONS },
     (_, index) => makeQuestion(index + 1)
   );
-  renderQuestion();
-  startTimer();
+
+  const instructions = $(".work-rate-instructions");
+  const testUI = $(".work-rate-ui");
+  const startButton = $(".start-test-button");
+
+  startButton?.addEventListener("click", () => {
+    if (state.finished) return;
+    if (instructions) instructions.hidden = true;
+    if (testUI) testUI.hidden = false;
+    renderQuestion();
+    startTimer();
+  });
 });
